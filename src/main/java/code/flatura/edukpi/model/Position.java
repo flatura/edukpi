@@ -13,8 +13,6 @@ import javax.persistence.*;
 @Entity
 @Table(name="positions")
 public class Position implements Serializable {
-    private static final long serialVersionUID = 1L;
-
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name="id")
@@ -24,6 +22,10 @@ public class Position implements Serializable {
     private String name;
 
     public Position() {
+    }
+
+    public Position(String name) {
+        this.name = name;
     }
 
     public UUID getId() {

@@ -36,20 +36,26 @@ id UUID NOT NULL DEFAULT uuid_generate_v4() PRIMARY KEY,
 name VARCHAR(100) NOT NULL UNIQUE,
 description VARCHAR(255),
 base INTEGER NOT NULL DEFAULT 5,
-max INTEGER NOT NULL DEFAULT 5,
-period INTEGER NOT NULL);
+max INTEGER NOT NULL DEFAULT 5);
 
 CREATE TABLE indicators_roles (
 indicator_id UUID NOT NULL,
 role_id UUID NOT NULL);
 
-CREATE TABLE facts (
-id UUID NOT NULL DEFAULT uuid_generate_v4() PRIMARY KEY,
-indicator_id UUID NOT NULL,
-user_id UUID NOT NULL,
-author_id UUID NOT NULL,
-created TIME NOT NULL DEFAULT 'now()',
-points INTEGER NOT NULL);
+CREATE TABLE facts
+(
+  id              UUID    NOT NULL DEFAULT uuid_generate_v4() PRIMARY KEY,
+  indicator_id    UUID    NOT NULL,
+  pointsSuggested INTEGER NOT NULL,
+  pointsApproved  INTEGER NOT NULL,
+  user_id         UUID    NOT NULL,
+  creator_id      UUID    NOT NULL,
+  created         TIME    NOT NULL DEFAULT 'now()',
+  modified         TIME    NOT NULL DEFAULT 'now()',
+  approved         TIME
+
+);
+
 
 CREATE TABLE files (
 id UUID NOT NULL DEFAULT uuid_generate_v4() PRIMARY KEY,

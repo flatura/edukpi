@@ -2,6 +2,7 @@ package code.flatura.edukpi.model;
 
 import java.io.Serializable;
 import java.util.Set;
+import java.util.UUID;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -13,12 +14,10 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name="indicators")
 public class Indicator implements Serializable {
-	private static final long serialVersionUID = 1L;
-
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private String id;
+	private UUID id;
 
 	@NotNull
 	@Column(name="name")
@@ -35,25 +34,21 @@ public class Indicator implements Serializable {
 	@Column(name="max")
 	private Integer max;
 
-	@NotNull
-	@Column(name="period")
-	private Integer period;
-
-	@ManyToMany
-	@JoinTable(
-			name = "indicators_to_roles",
-			joinColumns = @JoinColumn(name = "indicator_id"),
-			inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private Set<Role> roles;
-
 	public Indicator() {
 	}
 
-	public String getId() {
+	public Indicator(@NotNull String name, String description, @NotNull Integer base, @NotNull Integer max) {
+		this.name = name;
+		this.description = description;
+		this.base = base;
+		this.max = max;
+	}
+
+	public UUID getId() {
 		return this.id;
 	}
 
-	public void setId(String id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 
@@ -91,23 +86,5 @@ public class Indicator implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-
-	public Integer getPeriod() {
-		return this.period;
-	}
-
-	public void setPeriod(Integer period) {
-		this.period = period;
-	}
-
-
-	public Set<Role> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
 	}
 }

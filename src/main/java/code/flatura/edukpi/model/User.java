@@ -15,8 +15,6 @@ import java.util.UUID;
 @Entity
 @Table(name="users")
 public class User implements Serializable {
-	private static final long serialVersionUID = 1L;
-
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@NotNull
@@ -58,6 +56,15 @@ public class User implements Serializable {
 	private LocalDateTime lastSeen;
 
 	public User() {
+	}
+
+	public User(@NotNull String login, String password, @NotNull String name, @NotNull String surname, @NotNull Set<Role> roles, @NotNull Position position) {
+		this.login = login;
+		this.password = password;
+		this.name = name;
+		this.surname = surname;
+		this.roles = roles;
+		this.position = position;
 	}
 
 	public UUID getId() {

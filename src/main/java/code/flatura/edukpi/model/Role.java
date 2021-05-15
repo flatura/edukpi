@@ -14,8 +14,6 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name="roles")
 public class Role implements Serializable {
-	private static final long serialVersionUID = 1L;
-
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@NotNull
@@ -34,6 +32,11 @@ public class Role implements Serializable {
 	private Set<Indicator> indicators;
 
 	public Role() {
+	}
+
+	public Role(@NotNull String name, Set<Indicator> indicators) {
+		this.name = name;
+		this.indicators = indicators;
 	}
 
 	public UUID getId() {

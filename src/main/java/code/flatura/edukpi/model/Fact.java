@@ -15,7 +15,6 @@ import java.util.UUID;
 @Entity
 @Table(name="facts")
 public class Fact implements Serializable {
-
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id", unique = true, updatable = false)
@@ -25,15 +24,18 @@ public class Fact implements Serializable {
 	@Column(name="indicator_id")
 	private Indicator indicator;
 
-	@Column(name="points")
-	private Integer points;
+	@Column(name="pointsSuggested")
+	private Integer pointsSuggested;
+
+	@Column(name="pointsApproved")
+	private Integer pointsApproved;
 
 	@NonNull
 	@Column(name="user_id")
 	private User user;
 
 	@NonNull
-	@Column(name="author_id", updatable = false)
+	@Column(name="creator_id", updatable = false)
 	private User creator;
 
 	@NonNull
@@ -43,7 +45,20 @@ public class Fact implements Serializable {
 	@Column(name="modified")
 	private LocalDateTime lastModified;
 
+	@Column(name="approved")
+	private LocalDateTime approved;
+
+	@Column(name="approved_id")
+	private User approveUser;
+
 	public Fact() {
+	}
+
+	public Fact(Indicator indicator, Integer pointsSuggested, User user, User creator) {
+		this.indicator = indicator;
+		this.pointsSuggested = pointsSuggested;
+		this.user = user;
+		this.creator = creator;
 	}
 
 	public UUID getId() {
@@ -54,12 +69,12 @@ public class Fact implements Serializable {
 		this.id = id;
 	}
 
-	public Integer getPoints() {
-		return this.points;
+	public Integer getPointsSuggested() {
+		return this.pointsSuggested;
 	}
 
-	public void setPoints(Integer points) {
-		this.points = points;
+	public void setPointsSuggested(Integer pointsSuggested) {
+		this.pointsSuggested = pointsSuggested;
 	}
 
 	//bi-directional many-to-one association to Indicator
@@ -105,5 +120,29 @@ public class Fact implements Serializable {
 
 	public void setLastModified(LocalDateTime lastModified) {
 		this.lastModified = lastModified;
+	}
+
+	public Integer getPointsApproved() {
+		return pointsApproved;
+	}
+
+	public void setPointsApproved(Integer pointsApproved) {
+		this.pointsApproved = pointsApproved;
+	}
+
+	public LocalDateTime getApproved() {
+		return approved;
+	}
+
+	public void setApproved(LocalDateTime approved) {
+		this.approved = approved;
+	}
+
+	public User getApproveUser() {
+		return approveUser;
+	}
+
+	public void setApproveUser(User approveUser) {
+		this.approveUser = approveUser;
 	}
 }
