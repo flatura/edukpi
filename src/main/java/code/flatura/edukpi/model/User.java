@@ -30,6 +30,10 @@ public class User implements Serializable {
 	// @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private String password;
 
+    @NotNull
+    @Column(name="email")
+    private String email;
+
 	@NotNull
 	@Column(name="name")
 	private String name;
@@ -38,15 +42,14 @@ public class User implements Serializable {
 	@Column(name="surname")
 	private String surname;
 
-	@NotNull
-	//bi-directional many-to-one association to Role
 	@ManyToMany(fetch=FetchType.LAZY)
 	private Set<Role> roles;
 
-	@NotNull
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="position_id", nullable=false)
+	@Column(name = "positiion_id")
 	private Position position;
+
+	@ManyToMany(fetch=FetchType.LAZY)
+	private Set<Department> departments;
 
 	@NotNull
 	@Column(name="created")
@@ -58,13 +61,15 @@ public class User implements Serializable {
 	public User() {
 	}
 
-	public User(@NotNull String login, String password, @NotNull String name, @NotNull String surname, @NotNull Set<Role> roles, @NotNull Position position) {
+	public User(@NotNull String login, String password, @NotNull String email, @NotNull String name, @NotNull String surname, @NotNull Set<Role> roles, @NotNull Position position, Set<Department> departments ) {
 		this.login = login;
 		this.password = password;
+		this.email = email;
 		this.name = name;
 		this.surname = surname;
 		this.roles = roles;
 		this.position = position;
+		this.departments = departments;
 	}
 
 	public UUID getId() {
@@ -104,7 +109,15 @@ public class User implements Serializable {
 	}
 
 
-	public String getPassword() {
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
 		return this.password;
 	}
 
@@ -144,5 +157,13 @@ public class User implements Serializable {
 
 	public void setCreated(LocalDateTime created) {
 		this.created = created;
+	}
+
+	public Set<Department> getDepartments() {
+		return departments;
+	}
+
+	public void setDepartments(Set<Department> departments) {
+		this.departments = departments;
 	}
 }

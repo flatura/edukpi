@@ -1,7 +1,6 @@
 package code.flatura.edukpi.model;
 
 import java.io.Serializable;
-import java.util.Set;
 import java.util.UUID;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -24,19 +23,11 @@ public class Role implements Serializable {
 	@Column(name="name")
 	private String name;
 
-	@ManyToMany
-	@JoinTable(
-			name = "indicators_to_roles",
-			joinColumns = @JoinColumn(name = "role_id"),
-			inverseJoinColumns = @JoinColumn(name = "indicator_id"))
-	private Set<Indicator> indicators;
-
 	public Role() {
 	}
 
-	public Role(@NotNull String name, Set<Indicator> indicators) {
+	public Role(@NotNull String name) {
 		this.name = name;
-		this.indicators = indicators;
 	}
 
 	public UUID getId() {
@@ -47,20 +38,11 @@ public class Role implements Serializable {
 		this.id = id;
 	}
 
-
 	public String getName() {
 		return this.name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public Set<Indicator> getIndicators() {
-		return indicators;
-	}
-
-	public void setIndicators(Set<Indicator> indicators) {
-		this.indicators = indicators;
 	}
 }

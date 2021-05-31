@@ -21,11 +21,27 @@ public class Position implements Serializable {
     @Column(name="name")
     private String name;
 
+    @ManyToMany
+    @JoinTable(
+            name = "indicators_positions",
+            joinColumns = @JoinColumn(name = "position_id"),
+            inverseJoinColumns = @JoinColumn(name = "indicator_id"))
+    private Set<Indicator> indicators;
+
+    public Set<Indicator> getIndicators() {
+        return indicators;
+    }
+
+    public void setIndicators(Set<Indicator> indicators) {
+        this.indicators = indicators;
+    }
+
     public Position() {
     }
 
-    public Position(String name) {
+    public Position(String name, Set<Indicator> indicators) {
         this.name = name;
+        this.indicators = indicators;
     }
 
     public UUID getId() {

@@ -23,6 +23,9 @@ public class Indicator implements Serializable {
 	@Column(name="name")
 	private String name;
 
+	@Column(name="category_id")
+	private IndicatorCategory category;
+
 	@Column(name="description")
 	private String description;
 
