@@ -23,7 +23,8 @@ public class Indicator implements Serializable {
 	@Column(name="name")
 	private String name;
 
-	@Column(name="category_id")
+	@ManyToOne
+    @JoinColumn(name="category_id")
 	private IndicatorCategory category;
 
 	@Column(name="description")
@@ -37,7 +38,10 @@ public class Indicator implements Serializable {
 	@Column(name="max")
 	private Integer max;
 
-	public Indicator() {
+    @OneToMany(mappedBy="indicator")
+    private Set<Fact> facts;
+
+    public Indicator() {
 	}
 
 	public Indicator(@NotNull String name, String description, @NotNull Integer base, @NotNull Integer max) {
@@ -90,4 +94,20 @@ public class Indicator implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+    public IndicatorCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(IndicatorCategory category) {
+        this.category = category;
+    }
+
+    public Set<Fact> getFacts() {
+        return facts;
+    }
+
+    public void setFacts(Set<Fact> facts) {
+        this.facts = facts;
+    }
 }

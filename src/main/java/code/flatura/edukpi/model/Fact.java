@@ -20,22 +20,23 @@ public class Fact implements Serializable {
 	@Column(name="id", unique = true, updatable = false)
 	private UUID id;
 
-	@NonNull
-	@Column(name="indicator_id")
+	@ManyToOne()
+    @JoinColumn(name="indicator_id", nullable = false)
 	private Indicator indicator;
 
-	@Column(name="pointsSuggested")
+	@Column(name="points_suggested")
 	private Integer pointsSuggested;
 
-	@Column(name="pointsApproved")
+	@Column(name="points_approved")
 	private Integer pointsApproved;
 
-	@NonNull
-	@Column(name="user_id")
+    @ManyToOne()
+    @JoinColumn(name="user_id", nullable = false)
 	private User user;
 
 	@NonNull
-	@Column(name="creator_id", updatable = false)
+    @ManyToOne()
+    @JoinColumn(name="creator_id")
 	private User creator;
 
 	@NonNull
@@ -48,10 +49,11 @@ public class Fact implements Serializable {
 	@Column(name="approved")
 	private LocalDateTime approved;
 
-	@Column(name="approved_id")
-	private User approveUser;
+    @ManyToOne()
+    @JoinColumn(name="signer_id")
+	private User signer;
 
-	public Fact() {
+    public Fact() {
 	}
 
 	public Fact(Indicator indicator, Integer pointsSuggested, User user, User creator) {
@@ -138,11 +140,11 @@ public class Fact implements Serializable {
 		this.approved = approved;
 	}
 
-	public User getApproveUser() {
-		return approveUser;
+	public User getSigner() {
+		return signer;
 	}
 
-	public void setApproveUser(User approveUser) {
-		this.approveUser = approveUser;
+	public void setSigner(User signer) {
+		this.signer = signer;
 	}
 }

@@ -94,8 +94,8 @@ CREATE TABLE facts
 (
   id              UUID    NOT NULL DEFAULT uuid_generate_v4() PRIMARY KEY,
   indicator_id    UUID    NOT NULL,
-  pointsSuggested INTEGER NOT NULL,
-  pointsApproved  INTEGER NOT NULL,
+  points_suggested INTEGER NOT NULL,
+  points_approved  INTEGER NOT NULL,
   user_id         UUID    NOT NULL,
   creator_id      UUID,
   created         TIME    NOT NULL DEFAULT 'now()',
@@ -214,7 +214,7 @@ VALUES
   ('e4e6c509-9274-4f3c-89dd-bb8a2122714e', 'f332fbd7-e6a6-468e-8096-fb754db71c72'), -- Результаты ОГЭ
   ('9f9c4070-4578-475c-aedb-6f0271d23c5c', 'f332fbd7-e6a6-468e-8096-fb754db71c72'); -- Результаты ЕГЭ
 
-INSERT INTO facts (indicator_id, pointsSuggested, pointsApproved, user_id, creator_id)
+INSERT INTO facts (indicator_id, points_suggested, points_approved, user_id, creator_id)
 VALUES
   ('c6f33b37-b426-4120-9d96-a157c61ca2ce',5,0,'af61adb1-63ed-4123-bbab-63eceda8d2c2','af61adb1-63ed-4123-bbab-63eceda8d2c2'), -- Морозов административная оценка
   ('88d0dcf1-0103-41b2-a528-4c71047bc3be',8,0,'af61adb1-63ed-4123-bbab-63eceda8d2c2','af61adb1-63ed-4123-bbab-63eceda8d2c2'), -- Морозов обща зн.

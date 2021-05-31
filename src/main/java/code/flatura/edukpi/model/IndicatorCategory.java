@@ -3,6 +3,7 @@ package code.flatura.edukpi.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -17,6 +18,9 @@ public class IndicatorCategory implements Serializable {
 
     @Column(name="name")
     private String name;
+
+    @OneToMany(mappedBy = "category")
+    private Set<Indicator> indicators;
 
     public IndicatorCategory() {
     }
@@ -39,5 +43,13 @@ public class IndicatorCategory implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<Indicator> getIndicators() {
+        return indicators;
+    }
+
+    public void setIndicators(Set<Indicator> indicators) {
+        this.indicators = indicators;
     }
 }

@@ -28,6 +28,9 @@ public class Position implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "indicator_id"))
     private Set<Indicator> indicators;
 
+    @OneToMany(mappedBy = "position")
+    private Set<User> users;
+
     public Set<Indicator> getIndicators() {
         return indicators;
     }
@@ -59,5 +62,13 @@ public class Position implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 }

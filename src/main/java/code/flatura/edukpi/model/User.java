@@ -45,7 +45,8 @@ public class User implements Serializable {
 	@ManyToMany(fetch=FetchType.LAZY)
 	private Set<Role> roles;
 
-	@Column(name = "positiion_id")
+	@ManyToOne()
+	@JoinColumn(name="position_id")
 	private Position position;
 
 	@ManyToMany(fetch=FetchType.LAZY)
@@ -57,6 +58,15 @@ public class User implements Serializable {
 
 	@Column(name="last_seen")
 	private LocalDateTime lastSeen;
+
+	@OneToMany(mappedBy="user")
+	private Set<Fact> factsUser;
+
+	@OneToMany(mappedBy="creator")
+	private Set<Fact> factsCreator;
+
+	@OneToMany(mappedBy="signer")
+	private Set<Fact> factsSigner;
 
 	public User() {
 	}
@@ -165,5 +175,29 @@ public class User implements Serializable {
 
 	public void setDepartments(Set<Department> departments) {
 		this.departments = departments;
+	}
+
+	public Set<Fact> getFactsUser() {
+		return factsUser;
+	}
+
+	public void setFactsUser(Set<Fact> factsUser) {
+		this.factsUser = factsUser;
+	}
+
+	public Set<Fact> getFactsCreator() {
+		return factsCreator;
+	}
+
+	public void setFactsCreator(Set<Fact> factsCreator) {
+		this.factsCreator = factsCreator;
+	}
+
+	public Set<Fact> getFactsSigner() {
+		return factsSigner;
+	}
+
+	public void setFactsSigner(Set<Fact> factsSigner) {
+		this.factsSigner = factsSigner;
 	}
 }
