@@ -53,6 +53,8 @@ public class Fact implements Serializable {
     @JoinColumn(name="signer_id")
 	private User signer;
 
+    //TODO: Add Description here and to DB table facts
+
     public Fact() {
 	}
 

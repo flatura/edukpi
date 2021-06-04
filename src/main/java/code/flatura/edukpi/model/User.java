@@ -3,10 +3,8 @@ package code.flatura.edukpi.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Set;
-import java.util.UUID;
 
 /**
  * The persistent class for the users database table.
@@ -14,12 +12,7 @@ import java.util.UUID;
  */
 @Entity
 @Table(name="users")
-public class User implements Serializable {
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@NotNull
-	@Column(name="id")
-	private UUID id;
+public class User extends AbstractEntity {
 
 	@NotNull
 	@Column(name="login")
@@ -33,10 +26,6 @@ public class User implements Serializable {
     @NotNull
     @Column(name="email")
     private String email;
-
-	@NotNull
-	@Column(name="name")
-	private String name;
 
 	@NotNull
 	@Column(name="surname")
@@ -72,24 +61,15 @@ public class User implements Serializable {
 	}
 
 	public User(@NotNull String login, String password, @NotNull String email, @NotNull String name, @NotNull String surname, @NotNull Set<Role> roles, @NotNull Position position, Set<Department> departments ) {
+		super(name);
 		this.login = login;
 		this.password = password;
 		this.email = email;
-		this.name = name;
 		this.surname = surname;
 		this.roles = roles;
 		this.position = position;
 		this.departments = departments;
 	}
-
-	public UUID getId() {
-		return this.id;
-	}
-
-	public void setId(UUID id) {
-		this.id = id;
-	}
-
 
 	@Column(name="last_seen")
 	public LocalDateTime getLastSeen() {
@@ -109,16 +89,6 @@ public class User implements Serializable {
 		this.login = login;
 	}
 
-
-	public String getName() {
-		return this.name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-
     public String getEmail() {
         return email;
     }
@@ -135,7 +105,6 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-
 	public Position getPosition() {
 		return this.position;
 	}
@@ -143,7 +112,6 @@ public class User implements Serializable {
 	public void setPosition(Position position) {
 		this.position = position;
 	}
-
 
 	public String getSurname() {
 		return this.surname;
