@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
@@ -30,8 +31,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Override
     List<User> findAll(Sort sort);
 
-    //    https://stackoverflow.com/a/46013654/548473
-    @EntityGraph(attributePaths = {"meals"}, type = EntityGraph.EntityGraphType.LOAD)
     @Query("SELECT u FROM User u WHERE u.id=?1")
-    User getById(int id);
+    Optional<User> findById(UUID id);
 }

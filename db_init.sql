@@ -41,6 +41,7 @@ CREATE TABLE users
   position_id UUID,
   created     TIMESTAMP             DEFAULT now() NOT NULL,
   last_seen   TIMESTAMP,
+  description VARCHAR(200),
   CONSTRAINT user_login_idx UNIQUE (login),
   FOREIGN KEY (position_id) REFERENCES positions (id) ON UPDATE CASCADE ON DELETE SET NULL
 );
@@ -98,10 +99,12 @@ CREATE TABLE facts
   points_approved  INTEGER NOT NULL,
   user_id         UUID    NOT NULL,
   creator_id      UUID,
-  created         TIME    NOT NULL DEFAULT 'now()',
-  modified        TIME    NOT NULL DEFAULT 'now()',
-  approved        TIME,
+  created         TIMESTAMP    NOT NULL DEFAULT 'now()',
+  modified        TIMESTAMP,
+  approved        TIMESTAMP,
   signer_id       UUID,
+  description     VARCHAR(600),
+  signer_description VARCHAR(600),
   CONSTRAINT facts_idx UNIQUE (indicator_id, created, user_id),
   FOREIGN KEY (indicator_id) REFERENCES indicators (id) ON UPDATE CASCADE ON DELETE CASCADE,
   FOREIGN KEY (user_id) REFERENCES users (id) ON UPDATE CASCADE ON DELETE CASCADE,

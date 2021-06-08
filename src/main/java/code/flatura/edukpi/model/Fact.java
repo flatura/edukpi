@@ -27,6 +27,9 @@ public class Fact implements Serializable {
 	@Column(name="points_suggested")
 	private Integer pointsSuggested;
 
+	@Column(name="description")
+	private String description;
+
 	@Column(name="points_approved")
 	private Integer pointsApproved;
 
@@ -53,16 +56,20 @@ public class Fact implements Serializable {
     @JoinColumn(name="signer_id")
 	private User signer;
 
+    @Column(name="signer_description")
+	private String signerDescription;
+
     //TODO: Add Description here and to DB table facts
 
     public Fact() {
 	}
 
-	public Fact(Indicator indicator, Integer pointsSuggested, User user, User creator) {
+	public Fact(Indicator indicator, Integer pointsSuggested, User user, User creator, String description) {
 		this.indicator = indicator;
 		this.pointsSuggested = pointsSuggested;
 		this.user = user;
 		this.creator = creator;
+		this.description = description;
 	}
 
 	public UUID getId() {
@@ -106,10 +113,6 @@ public class Fact implements Serializable {
 		return creator;
 	}
 
-	public void setCreator(User creator) {
-		this.creator = creator;
-	}
-
 	public LocalDateTime getCreated() {
 		return this.created;
 	}
@@ -148,5 +151,25 @@ public class Fact implements Serializable {
 
 	public void setSigner(User signer) {
 		this.signer = signer;
+	}
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+	public void setCreator(User creator) {
+		this.creator = creator;
+	}
+
+	public String getSignerDescription() {
+		return signerDescription;
+	}
+
+	public void setSignerDescription(String signerDescription) {
+		this.signerDescription = signerDescription;
 	}
 }
