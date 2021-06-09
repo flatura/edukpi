@@ -1,0 +1,10 @@
+<div class="form-group">
+    <label class="form-label" for="indicator_dropdown">Наименование показателя</label>
+    <select class="form-select" th:field="*{indicatorId}" id="indicator_dropdown" name="indicator_dropdown">
+        <option th:each="i : ${indicators_list.entrySet()}"
+                th:value="${i.getValue()}"
+                th:text="${i.getKey()}"
+                th:selected="${fact.indicatorId} == ${i.getKey()}">
+        </option>
+    </select>
+</div>

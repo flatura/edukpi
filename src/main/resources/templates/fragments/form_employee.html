@@ -1,0 +1,10 @@
+<div class="form-group">
+    <label class="form-label" for="user_dropdown">ФИО сотрудника</label>
+    <select class="form-select" th:field="*{employeeId}" id="user_dropdown" name="user_dropdown">
+        <option th:each="e : ${employees_list.entrySet()}"
+                th:value="${e.getValue()}"
+                th:text="${e.getKey()}"
+                th:selected="${fact.employeeId} == ${e.getKey()}">
+        </option>
+    </select>
+</div>
